@@ -46,6 +46,9 @@ namespace Pinetime {
   namespace Controllers {
     class TouchHandler;
   }
+  namespace Applications {
+    class DisplayApp;
+  }
   namespace System {
     class SystemTask {
     public:

@@ -6,7 +6,7 @@ namespace Pinetime {
   namespace Controllers {
     class BrightnessController {
     public:
-      enum class Levels { Off, Low, Medium, High };
+      enum class Levels { Off, Low, Medium, High, Automatic };
       void Init();
 
       void Set(Levels level);
@@ -17,9 +17,6 @@ namespace Pinetime {
 
       void Backup();
       void Restore();
-
-      const char* GetIcon();
-      const char* ToString();
 
     private:
       Levels level = Levels::High;

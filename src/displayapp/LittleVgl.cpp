@@ -1,5 +1,4 @@
 #include "LittleVgl.h"
-#include "lv_pinetime_theme.h"
 
 #include <FreeRTOS.h>
 #include <task.h>
@@ -28,7 +27,6 @@ LittleVgl::LittleVgl(Pinetime::Drivers::St7789& lcd, Pinetime::Drivers::Cst816S&
 
 void LittleVgl::Init() {
   lv_init();
-  InitTheme();
   InitDisplay();
   InitTouchpad();
 }
@@ -181,12 +179,4 @@ bool LittleVgl::GetTouchPadInfo(lv_indev_data_t* ptr) {
     ptr->state = LV_INDEV_STATE_REL;
   }
   return false;
-}
-
-void LittleVgl::InitTheme() {
-
-  lv_theme_t* th = lv_pinetime_theme_init(
-    LV_COLOR_WHITE, LV_COLOR_SILVER, 0, &jetbrains_mono_bold_20, &jetbrains_mono_bold_20, &jetbrains_mono_bold_20, &jetbrains_mono_bold_20);
-
-  lv_theme_set_act(th);
 }

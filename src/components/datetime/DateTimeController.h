@@ -58,13 +58,23 @@ namespace Pinetime {
         return second;
       }
 
-      const char* MonthShortToString();
-      const char* MonthShortToStringLow();
-      const char* MonthsToStringLow();
-      const char* DayOfWeekToString();
-      const char* DayOfWeekShortToString();
-      const char* DayOfWeekToStringLow();
-      const char* DayOfWeekShortToStringLow();
+      const char* MonthToString() { return _monthsString[static_cast<uint8_t>(month)]; }
+      const char* MonthToStringLow() { return _monthsStringLow[static_cast<uint8_t>(month)]; }
+      const char* MonthShortToString() { return _monthsStringShort[static_cast<uint8_t>(month)]; }
+      const char* MonthShortToStringLow() { return _monthsStringShortLow[static_cast<uint8_t>(month)]; }
+      const char* DayOfWeekToString() { return _daysString[static_cast<uint8_t>(dayOfWeek)]; }
+      const char* DayOfWeekToStringLow() { return _daysStringLow[static_cast<uint8_t>(dayOfWeek)]; }
+      const char* DayOfWeekShortToString() { return _daysStringShort[static_cast<uint8_t>(dayOfWeek)]; }
+      const char* DayOfWeekShortToStringLow() { return _daysStringShortLow[static_cast<uint8_t>(dayOfWeek)]; }
+
+      static const char* MonthToString(Months month) { return _monthsString[static_cast<uint8_t>(month)]; }
+      static const char* MonthToStringLow(Months month) { return _monthsStringLow[static_cast<uint8_t>(month)]; }
+      static const char* MonthShortToString(Months month) { return _monthsStringShort[static_cast<uint8_t>(month)]; }
+      static const char* MonthShortToStringLow(Months month) { return _monthsStringShortLow[static_cast<uint8_t>(month)]; }
+      static const char* DayOfWeekToString(Days dayOfWeek) { return _daysString[static_cast<uint8_t>(dayOfWeek)]; }
+      static const char* DayOfWeekToStringLow(Days dayOfWeek) { return _daysStringLow[static_cast<uint8_t>(dayOfWeek)]; }
+      static const char* DayOfWeekShortToString(Days dayOfWeek) { return _daysStringShort[static_cast<uint8_t>(dayOfWeek)]; }
+      static const char* DayOfWeekShortToStringLow(Days dayOfWeek) { return _daysStringShortLow[static_cast<uint8_t>(dayOfWeek)]; }
 
       std::chrono::time_point<std::chrono::system_clock, std::chrono::nanoseconds> CurrentDateTime() const {
         return currentDateTime;
@@ -92,13 +102,14 @@ namespace Pinetime {
       bool isMidnightAlreadyNotified = false;
       System::SystemTask* systemTask = nullptr;
 
-      static char const* DaysString[];
-      static char const* DaysStringShort[];
-      static char const* DaysStringLow[];
-      static char const* DaysStringShortLow[];
-      static char const* MonthsString[];
-      static char const* MonthsStringLow[];
-      static char const* MonthsLow[];
+      static char const* _daysString[];
+      static char const* _daysStringLow[];
+      static char const* _daysStringShort[];
+      static char const* _daysStringShortLow[];
+      static char const* _monthsString[];
+      static char const* _monthsStringLow[];
+      static char const* _monthsStringShort[];
+      static char const* _monthsStringShortLow[];
     };
   }
 }

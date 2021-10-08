@@ -1,10 +1,10 @@
 cmake_minimum_required(VERSION 3.10)
 
-project(pinetime-app C CXX ASM)
+project(b3yondtime-app C CXX ASM)
 
 
 # define some variables just for this example to determine file locations
-set(NRF_PROJECT_NAME pinetime-app)
+set(NRF_PROJECT_NAME b3yondtime-app)
 set(NRF_BOARD pca10040)
 
 # check if all the necessary tools paths have been provided.
@@ -291,9 +291,9 @@ set(LVGL_SRC
         libs/lvgl/src/lv_font/lv_font_loader.c
         # LVGL Fonts
         libs/lvgl/src/lv_font/lv_font_montserrat_14.c
-        libs/lvgl/src/lv_font/lv_font_montserrat_18.c
-        libs/lvgl/src/lv_font/lv_font_montserrat_22.c
-        libs/lvgl/src/lv_font/lv_font_montserrat_28.c
+        #libs/lvgl/src/lv_font/lv_font_montserrat_18.c
+        #libs/lvgl/src/lv_font/lv_font_montserrat_22.c
+        #libs/lvgl/src/lv_font/lv_font_montserrat_28.c
         #
         libs/lvgl/src/lv_hal/lv_hal_disp.c
         libs/lvgl/src/lv_hal/lv_hal_indev.c
@@ -357,92 +357,47 @@ set(LVGL_SRC
         libs/lvgl/src/lv_widgets/lv_win.c
         )
 
-list(APPEND IMAGE_FILES
-        displayapp/icons/battery/os_battery_error.c
-        displayapp/icons/battery/os_battery_100.c
-        displayapp/icons/battery/os_battery_090.c
-        displayapp/icons/battery/os_battery_080.c
-        displayapp/icons/battery/os_battery_070.c
-        displayapp/icons/battery/os_battery_060.c
-        displayapp/icons/battery/os_battery_050.c
-        displayapp/icons/battery/os_battery_040.c
-        displayapp/icons/battery/os_battery_030.c
-        displayapp/icons/battery/os_battery_020.c
-        displayapp/icons/battery/os_battery_010.c
-        displayapp/icons/battery/os_battery_005.c
-
-        displayapp/icons/battery/os_batterycharging_100.c
-        displayapp/icons/battery/os_batterycharging_090.c
-        displayapp/icons/battery/os_batterycharging_080.c
-        displayapp/icons/battery/os_batterycharging_070.c
-        displayapp/icons/battery/os_batterycharging_060.c
-        displayapp/icons/battery/os_batterycharging_050.c
-        displayapp/icons/battery/os_batterycharging_040.c
-        displayapp/icons/battery/os_batterycharging_030.c
-        displayapp/icons/battery/os_batterycharging_020.c
-        displayapp/icons/battery/os_batterycharging_010.c
-        displayapp/icons/battery/os_batterycharging_005.c
-
-        displayapp/icons/bluetooth/os_bt_connected.c
-        displayapp/icons/bluetooth/os_bt_disconnected.c
-
-        )
-
 list(APPEND SOURCE_FILES
+        main.cpp
         BootloaderVersion.cpp
         logging/NrfLogger.cpp
+
+        displayapp/LittleVgl.cpp
         displayapp/DisplayApp.cpp
-        displayapp/screens/Screen.cpp
-        displayapp/screens/Clock.cpp
-        displayapp/screens/Tile.cpp
-        displayapp/screens/Meter.cpp
-        displayapp/screens/InfiniPaint.cpp
-        displayapp/screens/Paddle.cpp
-        displayapp/screens/StopWatch.cpp
-        displayapp/screens/BatteryIcon.cpp
-        displayapp/screens/BleIcon.cpp
-        displayapp/screens/NotificationIcon.cpp
-        displayapp/screens/Brightness.cpp
-        displayapp/screens/SystemInfo.cpp
-        displayapp/screens/Label.cpp
-        displayapp/screens/FirmwareUpdate.cpp
-        displayapp/screens/Music.cpp
-        displayapp/screens/Navigation.cpp
-        displayapp/screens/Metronome.cpp
-        displayapp/screens/Motion.cpp
-        displayapp/screens/FirmwareValidation.cpp
-        displayapp/screens/ApplicationList.cpp
-        displayapp/screens/Notifications.cpp
-        displayapp/screens/Twos.cpp
-        displayapp/screens/HeartRate.cpp
-        displayapp/screens/Motion.cpp
-        displayapp/screens/FlashLight.cpp
-        displayapp/screens/List.cpp
-        displayapp/screens/BatteryInfo.cpp
-        displayapp/screens/Steps.cpp
-        displayapp/screens/Timer.cpp
-        displayapp/screens/Alarm.cpp
-        displayapp/Colors.cpp
+        displayapp/SystemInterface.cc
+        displayapp/screens/Screen.cc
+        displayapp/screens/ScreenGraph.cc
+        displayapp/screens/DefaultScreenGraph.cc
+        displayapp/screens/WatchFace.cc
+        displayapp/screens/AnalogWatchFace.cc
+        displayapp/screens/DigitalWatchFace.cc
+        displayapp/screens/BinaryWatchFace.cc
+        displayapp/screens/FirmwareUpdateScreen.cc
+        displayapp/screens/FirmwareValidationScreen.cc
+        displayapp/screens/SettingsScreen.cc
+        displayapp/screens/SystemInfoScreen.cc
+        displayapp/screens/BrightnessScreen.cc
+        displayapp/screens/WakeUpModeScreen.cc
+        displayapp/screens/StepsGoalScreen.cc
 
-        ## Settings
-        displayapp/screens/settings/QuickSettings.cpp
-        displayapp/screens/settings/Settings.cpp
-        displayapp/screens/settings/SettingWatchFace.cpp
-        displayapp/screens/settings/SettingTimeFormat.cpp
-        displayapp/screens/settings/SettingWakeUp.cpp
-        displayapp/screens/settings/SettingDisplay.cpp
-        displayapp/screens/settings/SettingSteps.cpp
-        displayapp/screens/settings/SettingPineTimeStyle.cpp
+        displayapp/images/image_analog_watchface_bg.c
+        displayapp/images/image_digital_watchface_bg.c
+        displayapp/images/image_binary_watchface_bg.c
 
-        ## Watch faces
-        displayapp/icons/bg_clock.c
-        displayapp/screens/WatchFaceAnalog.cpp
-        displayapp/screens/WatchFaceDigital.cpp
-        displayapp/screens/PineTimeStyle.cpp
+        displayapp/fonts/font_dvs_ascii_12.c
+        displayapp/fonts/font_dvs_ascii_14.c
+        displayapp/fonts/font_dvs_ascii_16.c
+        displayapp/fonts/font_dvsb_caps_16.c
+        displayapp/fonts/font_dvsb_ascii_18.c
+        displayapp/fonts/font_dvs_digits_20.c
+        displayapp/fonts/font_dvs_digits_24.c
+        displayapp/fonts/font_symbols_14.c
+        displayapp/fonts/font_symbols_32.c
+        displayapp/fonts/FontAwesomeBrands24.c
+        displayapp/fonts/FontAwesomeRegular24.c
+        displayapp/fonts/FontAwesomeSolid24.c
+        displayapp/fonts/FontBoldDigits96.c
 
-        ##
-
-        main.cpp
         drivers/St7789.cpp
         drivers/SpiNorFlash.cpp
         drivers/SpiMaster.cpp
@@ -454,6 +409,9 @@ list(APPEND SOURCE_FILES
         drivers/Bma421.cpp
         drivers/Bma421_C/bma4.c
         drivers/Bma421_C/bma423.c
+        drivers/Cst816s.cpp
+        drivers/TwiMaster.cpp
+
         components/battery/BatteryController.cpp
         components/ble/BleController.cpp
         components/ble/NotificationManager.cpp
@@ -469,7 +427,6 @@ list(APPEND SOURCE_FILES
         components/ble/AlertNotificationService.cpp
         components/ble/MusicService.cpp
         components/ble/NavigationService.cpp
-        displayapp/fonts/lv_font_navi_80.c
         components/ble/BatteryInformationService.cpp
         components/ble/ImmediateAlertService.cpp
         components/ble/ServiceDiscovery.cpp
@@ -480,38 +437,28 @@ list(APPEND SOURCE_FILES
         components/timer/TimerController.cpp
         components/alarm/AlarmController.cpp
         components/fs/FS.cpp
-        drivers/Cst816s.cpp
-        FreeRTOS/port.c
-        FreeRTOS/port_cmsis_systick.c
-        FreeRTOS/port_cmsis.c
-
-        displayapp/LittleVgl.cpp
-        displayapp/fonts/jetbrains_mono_extrabold_compressed.c
-        displayapp/fonts/jetbrains_mono_bold_20.c
-        displayapp/fonts/jetbrains_mono_76.c
-        displayapp/fonts/jetbrains_mono_42.c
-        displayapp/fonts/lv_font_sys_48.c
-        displayapp/fonts/open_sans_light.c
-        displayapp/lv_pinetime_theme.c
-
-        systemtask/SystemTask.cpp
-        drivers/TwiMaster.cpp
-
-        heartratetask/HeartRateTask.cpp
         components/heartrate/Ppg.cpp
         components/heartrate/Biquad.cpp
         components/heartrate/Ptagc.cpp
         components/heartrate/HeartRateController.cpp
+        components/ComponentContainer.cc
 
+        FreeRTOS/port.c
+        FreeRTOS/port_cmsis_systick.c
+        FreeRTOS/port_cmsis.c
+
+        systemtask/SystemTask.cpp
+        heartratetask/HeartRateTask.cpp
         touchhandler/TouchHandler.cpp
         )
 
 list(APPEND RECOVERY_SOURCE_FILES
+        main.cpp
         BootloaderVersion.cpp
         logging/NrfLogger.cpp
+
         displayapp/DisplayAppRecovery.cpp
 
-        main.cpp
         drivers/St7789.cpp
         drivers/SpiNorFlash.cpp
         drivers/SpiMaster.cpp
@@ -523,6 +470,9 @@ list(APPEND RECOVERY_SOURCE_FILES
         drivers/Bma421.cpp
         drivers/Bma421_C/bma4.c
         drivers/Bma421_C/bma423.c
+        drivers/Cst816s.cpp
+        drivers/TwiMaster.cpp
+
         components/battery/BatteryController.cpp
         components/ble/BleController.cpp
         components/ble/NotificationManager.cpp
@@ -546,22 +496,21 @@ list(APPEND RECOVERY_SOURCE_FILES
         components/settings/Settings.cpp
         components/timer/TimerController.cpp
         components/alarm/AlarmController.cpp
-        drivers/Cst816s.cpp
-        FreeRTOS/port.c
-        FreeRTOS/port_cmsis_systick.c
-        FreeRTOS/port_cmsis.c
-
-        systemtask/SystemTask.cpp
-        drivers/TwiMaster.cpp
         components/gfx/Gfx.cpp
         components/rle/RleDecoder.cpp
         components/heartrate/HeartRateController.cpp
-        heartratetask/HeartRateTask.cpp
         components/heartrate/Ppg.cpp
         components/heartrate/Biquad.cpp
         components/heartrate/Ptagc.cpp
         components/motor/MotorController.cpp
         components/fs/FS.cpp
+
+        FreeRTOS/port.c
+        FreeRTOS/port_cmsis_systick.c
+        FreeRTOS/port_cmsis.c
+
+        systemtask/SystemTask.cpp
+        heartratetask/HeartRateTask.cpp
         touchhandler/TouchHandler.cpp
         )
 
@@ -587,39 +536,30 @@ list(APPEND RECOVERYLOADER_SOURCE_FILES
 
 
 set(INCLUDE_FILES
-
         BootloaderVersion.h
         logging/Logger.h
         logging/NrfLogger.h
+
+        displayapp/LittleVgl.h
         displayapp/DisplayApp.h
+        displayapp/SystemInterface.h
         displayapp/Messages.h
         displayapp/TouchEvents.h
         displayapp/screens/Screen.h
-        displayapp/screens/Clock.h
-        displayapp/screens/Tile.h
-        displayapp/screens/Meter.h
-        displayapp/screens/InfiniPaint.h
-        displayapp/screens/StopWatch.h
-        displayapp/screens/Paddle.h
-        displayapp/screens/DropDownDemo.h
-        displayapp/screens/BatteryIcon.h
-        displayapp/screens/BleIcon.h
-        displayapp/screens/NotificationIcon.h
-        displayapp/screens/Brightness.h
-        displayapp/screens/SystemInfo.h
-        displayapp/screens/ScreenList.h
-        displayapp/screens/Label.h
-        displayapp/screens/FirmwareUpdate.h
-        displayapp/screens/FirmwareValidation.h
-        displayapp/screens/ApplicationList.h
-        displayapp/Apps.h
-        displayapp/screens/Notifications.h
-        displayapp/screens/HeartRate.h
-        displayapp/screens/Metronome.h
-        displayapp/screens/Motion.h
-        displayapp/screens/Timer.h
-        displayapp/screens/Alarm.h
-        displayapp/Colors.h
+        displayapp/screens/ScreenGraph.h
+        displayapp/screens/DefaultScreenGraph.h
+        displayapp/screens/WatchFace.h
+        displayapp/screens/AnalogWatchFace.h
+        displayapp/screens/DigitalWatchFace.h
+        displayapp/screens/BinaryWatchFace.h
+        displayapp/screens/FirmwareUpdateScreen.h
+        displayapp/screens/FirmwareValidationScreen.h
+        displayapp/screens/SettingsScreen.h
+        displayapp/screens/SystemInfoScreen.h
+        displayapp/screens/BrightnessScreen.h
+        displayapp/screens/WakeUpModeScreen.h
+        displayapp/screens/StepsGoalScreen.h
+
         drivers/St7789.h
         drivers/SpiNorFlash.h
         drivers/SpiMaster.h
@@ -632,6 +572,9 @@ set(INCLUDE_FILES
         drivers/Bma421.h
         drivers/Bma421_C/bma4.c
         drivers/Bma421_C/bma423.c
+        drivers/Cst816s.h
+        drivers/TwiMaster.h
+
         components/battery/BatteryController.h
         components/ble/BleController.h
         components/ble/NotificationManager.h
@@ -652,9 +595,16 @@ set(INCLUDE_FILES
         components/settings/Settings.h
         components/timer/TimerController.h
         components/alarm/AlarmController.h
-        drivers/Cst816s.h
+        components/heartrate/Ppg.h
+        components/heartrate/Biquad.h
+        components/heartrate/Ptagc.h
+        components/heartrate/HeartRateController.h
+        components/motor/MotorController.h
+        components/ComponentContainer.h
+
         FreeRTOS/portmacro.h
         FreeRTOS/portmacro_cmsis.h
+
         libs/date/includes/date/tz.h
         libs/date/includes/date/chrono_io.h
         libs/date/includes/date/date.h
@@ -663,18 +613,10 @@ set(INCLUDE_FILES
         libs/date/includes/date/julian.h
         libs/date/includes/date/ptz.h
         libs/date/includes/date/tz_private.h
-        displayapp/LittleVgl.h
-        displayapp/lv_pinetime_theme.h
+
         systemtask/SystemTask.h
         systemtask/SystemMonitor.h
-        displayapp/screens/Symbols.h
-        drivers/TwiMaster.h
         heartratetask/HeartRateTask.h
-        components/heartrate/Ppg.h
-        components/heartrate/Biquad.h
-        components/heartrate/Ptagc.h
-        components/heartrate/HeartRateController.h
-        components/motor/MotorController.h
         touchhandler/TouchHandler.h
         )
 
@@ -839,8 +781,8 @@ target_compile_options(littlefs PRIVATE
         )
 
 # Build autonomous binary (without support for bootloader)
-set(EXECUTABLE_NAME "pinetime-app")
-set(EXECUTABLE_FILE_NAME ${EXECUTABLE_NAME}-${pinetime_VERSION_MAJOR}.${pinetime_VERSION_MINOR}.${pinetime_VERSION_PATCH})
+set(EXECUTABLE_NAME "b3yondtime-app")
+set(EXECUTABLE_FILE_NAME ${EXECUTABLE_NAME}-${b3yondtime_VERSION_MAJOR}.${b3yondtime_VERSION_MINOR}.${b3yondtime_VERSION_PATCH})
 set(NRF5_LINKER_SCRIPT "${CMAKE_SOURCE_DIR}/gcc_nrf52.ld")
 add_executable(${EXECUTABLE_NAME} ${SOURCE_FILES})
 set_target_properties(${EXECUTABLE_NAME} PROPERTIES OUTPUT_NAME ${EXECUTABLE_FILE_NAME})
@@ -867,10 +809,10 @@ add_custom_command(TARGET ${EXECUTABLE_NAME}
 
 
 # Build binary intended to be used by bootloader
-set(EXECUTABLE_MCUBOOT_NAME "pinetime-mcuboot-app")
-set(EXECUTABLE_MCUBOOT_FILE_NAME ${EXECUTABLE_MCUBOOT_NAME}-${pinetime_VERSION_MAJOR}.${pinetime_VERSION_MINOR}.${pinetime_VERSION_PATCH})
-set(IMAGE_MCUBOOT_FILE_NAME ${EXECUTABLE_MCUBOOT_NAME}-image-${pinetime_VERSION_MAJOR}.${pinetime_VERSION_MINOR}.${pinetime_VERSION_PATCH}.bin)
-set(DFU_MCUBOOT_FILE_NAME ${EXECUTABLE_MCUBOOT_NAME}-dfu-${pinetime_VERSION_MAJOR}.${pinetime_VERSION_MINOR}.${pinetime_VERSION_PATCH}.zip)
+set(EXECUTABLE_MCUBOOT_NAME "b3yondtime-mcuboot-app")
+set(EXECUTABLE_MCUBOOT_FILE_NAME ${EXECUTABLE_MCUBOOT_NAME}-${b3yondtime_VERSION_MAJOR}.${b3yondtime_VERSION_MINOR}.${b3yondtime_VERSION_PATCH})
+set(IMAGE_MCUBOOT_FILE_NAME ${EXECUTABLE_MCUBOOT_NAME}-image-${b3yondtime_VERSION_MAJOR}.${b3yondtime_VERSION_MINOR}.${b3yondtime_VERSION_PATCH}.bin)
+set(DFU_MCUBOOT_FILE_NAME ${EXECUTABLE_MCUBOOT_NAME}-dfu-${b3yondtime_VERSION_MAJOR}.${b3yondtime_VERSION_MINOR}.${b3yondtime_VERSION_PATCH}.zip)
 set(NRF5_LINKER_SCRIPT_MCUBOOT "${CMAKE_SOURCE_DIR}/gcc_nrf52-mcuboot.ld")
 add_executable(${EXECUTABLE_MCUBOOT_NAME} ${SOURCE_FILES})
 target_link_libraries(${EXECUTABLE_MCUBOOT_NAME} nimble nrf-sdk lvgl littlefs)
@@ -906,8 +848,8 @@ if(BUILD_DFU)
 endif()
 
 # InfiniTime recovery firmware (autonomous)
-set(EXECUTABLE_RECOVERY_NAME "pinetime-recovery")
-set(EXECUTABLE_RECOVERY_FILE_NAME ${EXECUTABLE_RECOVERY_NAME}-${pinetime_VERSION_MAJOR}.${pinetime_VERSION_MINOR}.${pinetime_VERSION_PATCH})
+set(EXECUTABLE_RECOVERY_NAME "b3yondtime-recovery")
+set(EXECUTABLE_RECOVERY_FILE_NAME ${EXECUTABLE_RECOVERY_NAME}-${b3yondtime_VERSION_MAJOR}.${b3yondtime_VERSION_MINOR}.${b3yondtime_VERSION_PATCH})
 add_executable(${EXECUTABLE_RECOVERY_NAME} ${RECOVERY_SOURCE_FILES})
 target_link_libraries(${EXECUTABLE_RECOVERY_NAME} nimble nrf-sdk littlefs)
 set_target_properties(${EXECUTABLE_RECOVERY_NAME} PROPERTIES OUTPUT_NAME ${EXECUTABLE_RECOVERY_FILE_NAME})
@@ -934,10 +876,10 @@ add_custom_command(TARGET ${EXECUTABLE_RECOVERY_NAME}
         )
 
 # InfiniTime recovery firmware (mcuboot)
-set(EXECUTABLE_RECOVERY_MCUBOOT_NAME "pinetime-mcuboot-recovery")
-set(EXECUTABLE_RECOVERY_MCUBOOT_FILE_NAME ${EXECUTABLE_RECOVERY_MCUBOOT_NAME}-${pinetime_VERSION_MAJOR}.${pinetime_VERSION_MINOR}.${pinetime_VERSION_PATCH})
-set(IMAGE_RECOVERY_MCUBOOT_FILE_NAME ${EXECUTABLE_RECOVERY_MCUBOOT_NAME}-image-${pinetime_VERSION_MAJOR}.${pinetime_VERSION_MINOR}.${pinetime_VERSION_PATCH}.bin)
-set(DFU_RECOVERY_MCUBOOT_FILE_NAME ${EXECUTABLE_RECOVERY_MCUBOOT_NAME}-dfu-${pinetime_VERSION_MAJOR}.${pinetime_VERSION_MINOR}.${pinetime_VERSION_PATCH}.zip)
+set(EXECUTABLE_RECOVERY_MCUBOOT_NAME "b3yondtime-mcuboot-recovery")
+set(EXECUTABLE_RECOVERY_MCUBOOT_FILE_NAME ${EXECUTABLE_RECOVERY_MCUBOOT_NAME}-${b3yondtime_VERSION_MAJOR}.${b3yondtime_VERSION_MINOR}.${b3yondtime_VERSION_PATCH})
+set(IMAGE_RECOVERY_MCUBOOT_FILE_NAME ${EXECUTABLE_RECOVERY_MCUBOOT_NAME}-image-${b3yondtime_VERSION_MAJOR}.${b3yondtime_VERSION_MINOR}.${b3yondtime_VERSION_PATCH}.bin)
+set(DFU_RECOVERY_MCUBOOT_FILE_NAME ${EXECUTABLE_RECOVERY_MCUBOOT_NAME}-dfu-${b3yondtime_VERSION_MAJOR}.${b3yondtime_VERSION_MINOR}.${b3yondtime_VERSION_PATCH}.zip)
 add_executable(${EXECUTABLE_RECOVERY_MCUBOOT_NAME} ${RECOVERY_SOURCE_FILES})
 target_link_libraries(${EXECUTABLE_RECOVERY_MCUBOOT_NAME} nimble nrf-sdk littlefs)
 set_target_properties(${EXECUTABLE_RECOVERY_MCUBOOT_NAME} PROPERTIES OUTPUT_NAME ${EXECUTABLE_RECOVERY_MCUBOOT_FILE_NAME})
@@ -974,8 +916,8 @@ if(BUILD_DFU)
 endif()
 
 # Build binary that writes the recovery image into the SPI flash memory
-set(EXECUTABLE_RECOVERYLOADER_NAME "pinetime-recovery-loader")
-set(EXECUTABLE_RECOVERYLOADER_FILE_NAME ${EXECUTABLE_RECOVERYLOADER_NAME}-${pinetime_VERSION_MAJOR}.${pinetime_VERSION_MINOR}.${pinetime_VERSION_PATCH})
+set(EXECUTABLE_RECOVERYLOADER_NAME "b3yondtime-recovery-loader")
+set(EXECUTABLE_RECOVERYLOADER_FILE_NAME ${EXECUTABLE_RECOVERYLOADER_NAME}-${b3yondtime_VERSION_MAJOR}.${b3yondtime_VERSION_MINOR}.${b3yondtime_VERSION_PATCH})
 add_executable(${EXECUTABLE_RECOVERYLOADER_NAME} ${RECOVERYLOADER_SOURCE_FILES})
 target_link_libraries(${EXECUTABLE_RECOVERYLOADER_NAME} nrf-sdk)
 set_target_properties(${EXECUTABLE_RECOVERYLOADER_NAME} PROPERTIES OUTPUT_NAME ${EXECUTABLE_RECOVERYLOADER_FILE_NAME})
@@ -1005,10 +947,10 @@ add_custom_command(TARGET ${EXECUTABLE_RECOVERYLOADER_NAME}
         )
 
 # Build binary that writes the recovery image (MCUBoot version)
-set(EXECUTABLE_MCUBOOT_RECOVERYLOADER_NAME "pinetime-mcuboot-recovery-loader")
-set(EXECUTABLE_MCUBOOT_RECOVERYLOADER_FILE_NAME ${EXECUTABLE_MCUBOOT_RECOVERYLOADER_NAME}-${pinetime_VERSION_MAJOR}.${pinetime_VERSION_MINOR}.${pinetime_VERSION_PATCH})
-set(IMAGE_MCUBOOT_RECOVERYLOADER_FILE_NAME ${EXECUTABLE_MCUBOOT_RECOVERYLOADER_NAME}-image-${pinetime_VERSION_MAJOR}.${pinetime_VERSION_MINOR}.${pinetime_VERSION_PATCH}.bin)
-set(DFU_MCUBOOT_RECOVERYLOADER_FILE_NAME ${EXECUTABLE_MCUBOOT_RECOVERYLOADER_NAME}-dfu-${pinetime_VERSION_MAJOR}.${pinetime_VERSION_MINOR}.${pinetime_VERSION_PATCH}.zip)
+set(EXECUTABLE_MCUBOOT_RECOVERYLOADER_NAME "b3yondtime-mcuboot-recovery-loader")
+set(EXECUTABLE_MCUBOOT_RECOVERYLOADER_FILE_NAME ${EXECUTABLE_MCUBOOT_RECOVERYLOADER_NAME}-${b3yondtime_VERSION_MAJOR}.${b3yondtime_VERSION_MINOR}.${b3yondtime_VERSION_PATCH})
+set(IMAGE_MCUBOOT_RECOVERYLOADER_FILE_NAME ${EXECUTABLE_MCUBOOT_RECOVERYLOADER_NAME}-image-${b3yondtime_VERSION_MAJOR}.${b3yondtime_VERSION_MINOR}.${b3yondtime_VERSION_PATCH}.bin)
+set(DFU_MCUBOOT_RECOVERYLOADER_FILE_NAME ${EXECUTABLE_MCUBOOT_RECOVERYLOADER_NAME}-dfu-${b3yondtime_VERSION_MAJOR}.${b3yondtime_VERSION_MINOR}.${b3yondtime_VERSION_PATCH}.zip)
 add_executable(${EXECUTABLE_MCUBOOT_RECOVERYLOADER_NAME} ${RECOVERYLOADER_SOURCE_FILES})
 target_link_libraries(${EXECUTABLE_MCUBOOT_RECOVERYLOADER_NAME} nrf-sdk)
 set_target_properties(${EXECUTABLE_MCUBOOT_RECOVERYLOADER_NAME} PROPERTIES OUTPUT_NAME ${EXECUTABLE_MCUBOOT_RECOVERYLOADER_FILE_NAME})

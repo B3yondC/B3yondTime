@@ -5,7 +5,6 @@
 #include <task.h>
 #include <memory>
 #include <systemtask/Messages.h>
-#include "Apps.h"
 #include "LittleVgl.h"
 #include "TouchEvents.h"
 #include "components/brightness/BrightnessController.h"
@@ -17,7 +16,13 @@
 #include "components/alarm/AlarmController.h"
 #include "touchhandler/TouchHandler.h"
 
+#include "SystemInterface.h"
+
 #include "Messages.h"
+
+class ComponentContainer;
+class ScreenGraph;
+
 
 namespace Pinetime {
 
@@ -30,6 +35,7 @@ namespace Pinetime {
     class Settings;
     class Battery;
     class Ble;
+    class BrightnessController;
     class DateTime;
     class NotificationManager;
     class HeartRateController;
@@ -41,10 +47,9 @@ namespace Pinetime {
     class SystemTask;
   };
   namespace Applications {
-    class DisplayApp {
+    class DisplayApp : public SystemInterface {
     public:
       enum class States { Idle, Running };
-      enum class FullRefreshDirections { None, Up, Down, Left, Right, LeftAnim, RightAnim };
 
       DisplayApp(Drivers::St7789& lcd,
                  Components::LittleVgl& lvgl,
@@ -53,20 +58,20 @@ namespace Pinetime {
                  Controllers::Ble& bleController,
                  Controllers::DateTime& dateTimeController,
                  Drivers::WatchdogView& watchdog,
-                 Pinetime::Controllers::NotificationManager& notificationManager,
-                 Pinetime::Controllers::HeartRateController& heartRateController,
+                 Controllers::NotificationManager& notificationManager,
+                 Controllers::HeartRateController& heartRateController,
                  Controllers::Settings& settingsController,
-                 Pinetime::Controllers::MotorController& motorController,
-                 Pinetime::Controllers::MotionController& motionController,
-                 Pinetime::Controllers::TimerController& timerController,
-                 Pinetime::Controllers::AlarmController& alarmController,
-                 Pinetime::Controllers::TouchHandler& touchHandler);
+                 Controllers::MotorController& motorController,
+                 Controllers::MotionController& motionController,
+                 Controllers::TimerController& timerController,
+                 Controllers::AlarmController& alarmController,
+                 Controllers::TouchHandler& touchHandler);
+      ~DisplayApp() override;
+
       void Start();
       void PushMessage(Display::Messages msg);
 
-      void StartApp(Apps app, DisplayApp::FullRefreshDirections direction);
-
-      void SetFullRefresh(FullRefreshDirections direction);
+      void setFullRefreshDirection(SystemInterface::FullRefreshDirection value) override;
 
       void Register(Pinetime::System::SystemTask* systemTask);
 
@@ -99,23 +104,19 @@ namespace Pinetime {
       static constexpr uint8_t queueSize = 10;
       static constexpr uint8_t itemSize = 1;
 
-      std::unique_ptr<Screens::Screen> currentScreen;
+      ComponentContainer *_components;
+      ScreenGraph *_screenGraph;
 
-      Apps currentApp = Apps::None;
-      Apps returnToApp = Apps::None;
-      FullRefreshDirections returnDirection = FullRefreshDirections::None;
       TouchEvents returnTouchEvent = TouchEvents::None;
 
-      TouchEvents GetGesture();
+      void RunningState();
+      void IdleState();
       static void Process(void* instance);
       void InitHw();
       void Refresh();
-      void ReturnApp(Apps app, DisplayApp::FullRefreshDirections direction, TouchEvents touchEvent);
-      void LoadApp(Apps app, DisplayApp::FullRefreshDirections direction);
       void PushMessageToSystemTask(Pinetime::System::Messages message);
 
-      Apps nextApp = Apps::None;
-      DisplayApp::FullRefreshDirections nextDirection;
+      TickType_t lastWakeTime;
     };
   }
 }

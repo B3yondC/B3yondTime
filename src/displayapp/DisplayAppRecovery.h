@@ -11,9 +11,11 @@
 #include <drivers/Watchdog.h>
 #include <components/motor/MotorController.h>
 #include "TouchEvents.h"
-#include "Apps.h"
 #include "Messages.h"
 #include "DummyLittleVgl.h"
+
+class ControllerContainer;
+
 
 namespace Pinetime {
   namespace Drivers {
@@ -49,14 +51,14 @@ namespace Pinetime {
                  Controllers::Ble& bleController,
                  Controllers::DateTime& dateTimeController,
                  Drivers::WatchdogView& watchdog,
-                 Pinetime::Controllers::NotificationManager& notificationManager,
-                 Pinetime::Controllers::HeartRateController& heartRateController,
+                 Controllers::NotificationManager& notificationManager,
+                 Controllers::HeartRateController& heartRateController,
                  Controllers::Settings& settingsController,
-                 Pinetime::Controllers::MotorController& motorController,
-                 Pinetime::Controllers::MotionController& motionController,
-                 Pinetime::Controllers::TimerController& timerController,
-                 Pinetime::Controllers::AlarmController& alarmController,
-                 Pinetime::Controllers::TouchHandler& touchHandler);
+                 Controllers::MotorController& motorController,
+                 Controllers::MotionController& motionController,
+                 Controllers::TimerController& timerController,
+                 Controllers::AlarmController& alarmController,
+                 Controllers::TouchHandler& touchHandler);
       void Start();
       void PushMessage(Pinetime::Applications::Display::Messages msg);
       void Register(Pinetime::System::SystemTask* systemTask);

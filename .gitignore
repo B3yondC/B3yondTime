@@ -40,6 +40,15 @@ Testing/Temporary/
 # Windows
 **/thumbs.db
 
-#VSCODE
+# VSCODE
 .vscode/.cortex-debug.registers.state.json
 .vscode/.cortex-debug.peripherals.state.json
+
+# Qt
+*.pro.user*
+
+# Font sources
+*.ttf
+*.TTF
+*.otf
+*.woff
