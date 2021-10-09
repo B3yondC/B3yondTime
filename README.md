@@ -32,7 +32,6 @@ At the moment there are three watch faces: analog, digital and binary.
 The watch faces can be locked and unlocked by pushing the side button. This feature is helpful
 to protect against unintended touch inputs when you wear the watch all day long.
 
-
 ### Settings
 
 Screens have been implemented for setting the brightness, the display wake up modes and the
