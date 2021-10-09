@@ -29,6 +29,9 @@ At the moment there are three watch faces: analog, digital and binary.
 
 ![Watch faces](images/b3yondtime-v0.1/watchfaces.jpg "Watch faces")
 
+The watch faces can be locked and unlocked by pushing the side button. This feature is helpful
+to protect against unintended touch inputs when you wear the watch all day long.
+
 
 ### Settings
 
@@ -42,9 +45,9 @@ activity goal (steps per day).
 New screens can be developed in the Qt mockup project. Swiping, tapping and pushing the side
 button can be simulated using the mouse.
 
-The mockup provides GUI elements to simulate different inputs of the watch's controllers.
-That way, you can properly test the behavior of new screens before embedding them into the
-firmware.
+The mockup provides GUI elements to generate different inputs from the watch's (mockup)
+controllers. That way, you can properly test the behavior of new screens before embedding
+them into the firmware.
 
 ![Mockup](images/b3yondtime-v0.1/mockup.jpg "Mockup")
 
