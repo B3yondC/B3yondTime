@@ -23,7 +23,30 @@ application works in significant ways:
 
 ## Overview
 
-to be continued...
+### Watch faces
+
+At the moment there are three watch faces: analog, digital and binary.
+
+![Watch faces](images/b3yondtime-v0.1/watchfaces.jpg "Watch faces")
+
+
+### Settings
+
+Screens have been implemented for setting the brightness, the display wake up modes and the
+activity goal (steps per day).
+
+![Settings](images/b3yondtime-v0.1/settings.jpg "Settings")
+
+### Mockup
+
+New screens can be developed in the Qt mockup project. Swiping, tapping and pushing the side
+button can be simulated using the mouse.
+
+The mockup provides GUI elements to simulate different inputs of the watch's controllers.
+That way, you can properly test the behavior of new screens before embedding them into the
+firmware.
+
+![Mockup](images/b3yondtime-v0.1/mockup.jpg "Mockup")
 
 
 ## The clockwork
