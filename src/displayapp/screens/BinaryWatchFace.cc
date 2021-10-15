@@ -102,9 +102,12 @@ void BinaryWatchFace::timeChanged(bool hourChanged, bool minuteChanged)
         if (hourChanged)
         {
                 // update the visibility of the hour lines
+                int theHour = static_cast<int>(hour()) % 12;
+                if (theHour == 0)
+                        theHour = 12;
                 for (int i = 0; i < 4; i++)
                 {
-                        bool visible = (((hour() % 12) >> i) & 1);
+                        bool visible = ((theHour >> i) & 1);
                         lv_obj_set_style_local_line_opa(_hourLines[i], LV_LINE_PART_MAIN, LV_STATE_DEFAULT, visible ? LV_OPA_COVER : LV_OPA_TRANSP);
                 }
         }
